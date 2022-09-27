@@ -1,15 +1,19 @@
 package br.me.desafio.challengeme.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_pedido")
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //private List<Item> itens;
 
     public Pedido() {
 
