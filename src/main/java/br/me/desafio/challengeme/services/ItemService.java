@@ -22,4 +22,8 @@ public class ItemService {
         Optional<Item> obj = repository.findById(id);
         return obj.get();
     }
+
+    public Item insert (Item obj) {
+        return repository.save(obj);
+    }
 }
