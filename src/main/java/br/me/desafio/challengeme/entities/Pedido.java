@@ -39,6 +39,22 @@ public class Pedido implements Serializable {
         return itens;
     }
 
+    public Double precoTotal() {
+        double soma = 0.0;
+        for (PedidoItem x: itens) {
+            soma += x.getSubTotal();
+        }
+        return soma;
+    }
+
+    public Integer itensTotal() {
+        int soma = 0;
+        for (PedidoItem x: itens) {
+            soma += x.getQuantidade();
+        }
+        return soma;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
