@@ -2,9 +2,7 @@ package br.me.desafio.challengeme.entities;
 
 import br.me.desafio.challengeme.enums.StatusPedido;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
