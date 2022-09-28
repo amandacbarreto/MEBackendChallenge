@@ -30,4 +30,16 @@ public class ItemService {
     public void delete (Long id) {
         repository.deleteById(id);
     }
+
+    public Item update (Long id, Item obj){
+        Item entity = repository.getOne(id);
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(Item entity, Item obj) {
+        entity.setDescricao(obj.getDescricao());
+        entity.setPrecoUnitario(obj.getPrecoUnitario());
+    }
+
 }
