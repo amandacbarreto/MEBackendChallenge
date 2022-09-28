@@ -14,7 +14,6 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     public Pedido() {
 
     }
