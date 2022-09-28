@@ -26,4 +26,8 @@ public class ItemService {
     public Item insert (Item obj) {
         return repository.save(obj);
     }
+
+    public void delete (Long id) {
+        repository.deleteById(id);
+    }
 }
