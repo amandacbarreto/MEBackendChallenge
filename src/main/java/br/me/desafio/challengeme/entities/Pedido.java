@@ -39,6 +39,10 @@ public class Pedido implements Serializable {
         return itens;
     }
 
+    public void setItens(Set<PedidoItem> itens) {
+        this.itens = itens;
+    }
+
     public Double precoTotal() {
         double soma = 0.0;
         for (PedidoItem x: itens) {

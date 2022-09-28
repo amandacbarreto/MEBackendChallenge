@@ -22,4 +22,10 @@ public class PedidoService {
         Optional<Pedido> obj = repository.findById(id);
         return obj.get();
     }
+
+    public Pedido insert (Pedido obj) {
+        return repository.save(obj);
+    }
+
+
 }
