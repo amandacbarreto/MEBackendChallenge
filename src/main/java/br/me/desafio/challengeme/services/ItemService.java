@@ -2,6 +2,7 @@ package br.me.desafio.challengeme.services;
 
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.repositories.ItemRepository;
+import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class ItemService {
 
     public Item findById(Long id){
         Optional<Item> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Item insert (Item obj) {
