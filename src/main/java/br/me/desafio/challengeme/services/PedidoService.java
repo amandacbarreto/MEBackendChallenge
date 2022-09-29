@@ -41,17 +41,22 @@ public class PedidoService {
     }
 
     public PedidoRespostaDTO findById(Long id){
-        Optional<Pedido> obj = repository.findById(id);
-        Pedido pedido = obj.get();
-        List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
+        try{
+            Optional<Pedido> obj = repository.findById(id);
+            Pedido pedido = obj.get();
+            List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
 
-        for (PedidoItem item : pedido.getItens()){
-            PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
-            pedidoItens.add(pi);
+            for (PedidoItem item : pedido.getItens()){
+                PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
+                pedidoItens.add(pi);
+            }
+
+            PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
+            return pedidoDTO;
+
+        } catch (NoSuchElementException e){
+            throw new ResourceNotFoundException(id);
         }
-
-        PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
-        return pedidoDTO;
     }
 
     public Pedido insert (PedidoDTO dto) {
