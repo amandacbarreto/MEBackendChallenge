@@ -26,11 +26,6 @@ public class PedidoService {
     @Autowired
     private PedidoItemRepository pedidoItemRepository;
 
-
-    /*public List<Pedido> findAll() {
-        return repository.findAll();
-    }*/
-
     public List<PedidoRespostaDTO> findAll() {
         List<Pedido> pedidos = repository.findAll();
         List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
@@ -48,10 +43,23 @@ public class PedidoService {
         return pedidosDTO;
     }
 
-    public Pedido findById(Long id){
+    public PedidoRespostaDTO findById(Long id){
+        Optional<Pedido> obj = repository.findById(id);
+        Pedido pedido = obj.get();
+        List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
+
+        for (PedidoItem item : pedido.getItens()){
+            PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
+            pedidoItens.add(pi);
+        }
+        PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
+        return pedidoDTO;
+    }
+
+    /*public Pedido findById(Long id){
         Optional<Pedido> obj = repository.findById(id);
         return obj.get();
-    }
+    }*/
 
     public Pedido insert (PedidoDTO dto) {
 
@@ -68,10 +76,5 @@ public class PedidoService {
         pedidoItemRepository.saveAll(pedidoItens);
         return pedido;
     }
-
-    /*public Pedido insert (Pedido pedido) {
-        return repository.save(pedido);
-    }*/
-
 
 }
