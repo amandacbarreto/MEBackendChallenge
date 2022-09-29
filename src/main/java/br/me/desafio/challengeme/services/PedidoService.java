@@ -31,12 +31,9 @@ public class PedidoService {
     public List<PedidoRespostaDTO> findAll() {
         List<Pedido> pedidos = repository.findAll();
         List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
-
         for (Pedido pedido : pedidos){
-            PedidoRespostaDTO pedidoDTO = this.findById(pedido.getId());
-            pedidosDTO.add(pedidoDTO);
+            pedidosDTO.add(pedido.convertToPedidoRespostaDTO());
         }
-
         return pedidosDTO;
     }
 
@@ -44,16 +41,7 @@ public class PedidoService {
         try{
             Optional<Pedido> obj = repository.findById(id);
             Pedido pedido = obj.get();
-            List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
-
-            for (PedidoItem item : pedido.getItens()){
-                PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
-                pedidoItens.add(pi);
-            }
-
-            PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
-            return pedidoDTO;
-
+            return pedido.convertToPedidoRespostaDTO();
         } catch (NoSuchElementException e){
             throw new ResourceNotFoundException(id);
         }

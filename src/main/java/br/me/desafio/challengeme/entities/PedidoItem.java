@@ -1,5 +1,6 @@
 package br.me.desafio.challengeme.entities;
 
+import br.me.desafio.challengeme.DTO.PedidoItemRespostaDTO;
 import br.me.desafio.challengeme.entities.pk.PedidoItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -67,6 +68,10 @@ public class PedidoItem  implements Serializable {
 
     public Double getSubTotal() {
         return preco * quantidade;
+    }
+
+    public PedidoItemRespostaDTO convertToPedidoItemRespostaDTO() {
+        return new PedidoItemRespostaDTO(getItem().getDescricao(), getItem().getPrecoUnitario(), quantidade );
     }
 
     @Override

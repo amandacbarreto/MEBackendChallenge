@@ -1,5 +1,8 @@
 package br.me.desafio.challengeme.entities;
 
+import br.me.desafio.challengeme.DTO.PedidoItemRespostaDTO;
+import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -57,6 +60,14 @@ public class Pedido implements Serializable {
             soma += x.getQuantidade();
         }
         return soma;
+    }
+
+    public PedidoRespostaDTO convertToPedidoRespostaDTO() {
+        Set<PedidoItemRespostaDTO> pedidoItens = new HashSet<>();
+        for (PedidoItem x: getItens()) {
+            pedidoItens.add(x.convertToPedidoItemRespostaDTO());
+        }
+        return new PedidoRespostaDTO(id, pedidoItens);
     }
 
     @Override
