@@ -23,8 +23,8 @@ public class Pedido implements Serializable {
 
     }
 
-    public Pedido(Long id) {
-        this.id = id;
+    public Pedido (Set<PedidoItem> itens) {
+        this.itens = itens;
     }
 
     public Long getId() {

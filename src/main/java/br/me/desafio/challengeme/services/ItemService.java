@@ -40,7 +40,6 @@ public class ItemService {
         } catch (DataIntegrityViolationException e){
             throw new DatabaseException(e.getMessage());
         }
-
     }
 
     public Item update (Long id, Item obj){
