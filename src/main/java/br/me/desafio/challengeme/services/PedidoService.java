@@ -31,12 +31,7 @@ public class PedidoService {
         List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
 
         for (Pedido pedido : pedidos){
-            List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
-            for (PedidoItem item : pedido.getItens()){
-                PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
-                pedidoItens.add(pi);
-            }
-            PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
+            PedidoRespostaDTO pedidoDTO = this.findById(pedido.getId());
             pedidosDTO.add(pedidoDTO);
         }
 
@@ -52,14 +47,10 @@ public class PedidoService {
             PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
             pedidoItens.add(pi);
         }
+
         PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
         return pedidoDTO;
     }
-
-    /*public Pedido findById(Long id){
-        Optional<Pedido> obj = repository.findById(id);
-        return obj.get();
-    }*/
 
     public Pedido insert (PedidoDTO dto) {
 
