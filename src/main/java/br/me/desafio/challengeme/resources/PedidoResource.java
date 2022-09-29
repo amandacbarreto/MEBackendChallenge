@@ -1,6 +1,7 @@
 package br.me.desafio.challengeme.resources;
 
 import br.me.desafio.challengeme.DTO.PedidoDTO;
+import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class PedidoResource {
     private PedidoService service;
 
     @GetMapping
-    public ResponseEntity<List<Pedido>> findAll() {
-        List<Pedido> list = service.findAll();
+    public ResponseEntity<List<PedidoRespostaDTO>> findAll() {
+        List<PedidoRespostaDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 

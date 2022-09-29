@@ -4,7 +4,7 @@ public class PedidoItemRespostaDTO {
 
     private String descricao;
     private Double precoUnitario;
-    private Integer quantidade;
+    private Integer qtd;
 
     public String getDescricao() {
         return descricao;
@@ -14,7 +14,13 @@ public class PedidoItemRespostaDTO {
         return precoUnitario;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public Integer getQtd() {
+        return qtd;
+    }
+
+    public PedidoItemRespostaDTO(String descricao, Double precoUnitario, Integer qtd) {
+        this.descricao = descricao;
+        this.precoUnitario = precoUnitario;
+        this.qtd = qtd;
     }
 }

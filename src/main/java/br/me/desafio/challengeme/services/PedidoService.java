@@ -2,6 +2,8 @@ package br.me.desafio.challengeme.services;
 
 import br.me.desafio.challengeme.DTO.PedidoDTO;
 import br.me.desafio.challengeme.DTO.PedidoItemDTO;
+import br.me.desafio.challengeme.DTO.PedidoItemRespostaDTO;
+import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.entities.PedidoItem;
@@ -10,10 +12,7 @@ import br.me.desafio.challengeme.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PedidoService {
@@ -28,8 +27,25 @@ public class PedidoService {
     private PedidoItemRepository pedidoItemRepository;
 
 
-    public List<Pedido> findAll() {
+    /*public List<Pedido> findAll() {
         return repository.findAll();
+    }*/
+
+    public List<PedidoRespostaDTO> findAll() {
+        List<Pedido> pedidos = repository.findAll();
+        List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
+
+        for (Pedido pedido : pedidos){
+            List<PedidoItemRespostaDTO>  pedidoItens = new ArrayList<>();
+            for (PedidoItem item : pedido.getItens()){
+                PedidoItemRespostaDTO pi = new PedidoItemRespostaDTO(item.getItem().getDescricao(), item.getItem().getPrecoUnitario(), item.getQuantidade());
+                pedidoItens.add(pi);
+            }
+            PedidoRespostaDTO pedidoDTO = new PedidoRespostaDTO(pedido.getId(), pedidoItens);
+            pedidosDTO.add(pedidoDTO);
+        }
+
+        return pedidosDTO;
     }
 
     public Pedido findById(Long id){
