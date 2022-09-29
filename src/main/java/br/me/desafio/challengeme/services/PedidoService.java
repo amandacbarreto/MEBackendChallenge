@@ -9,9 +9,11 @@ import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.entities.PedidoItem;
 import br.me.desafio.challengeme.repositories.PedidoItemRepository;
 import br.me.desafio.challengeme.repositories.PedidoRepository;
+import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
@@ -66,6 +68,30 @@ public class PedidoService {
         repository.save(pedido);
         pedidoItemRepository.saveAll(pedidoItens);
         return pedido;
+    }
+
+    public Pedido update (Long id, PedidoDTO pedidoDTO){
+        try{
+            Optional<Pedido> obj = repository.findById(id);
+            Pedido pedido = obj.get();
+
+            for (PedidoItem pedidoItem: pedido.getItens()){
+                pedidoItemRepository.delete(pedidoItem);
+            }
+
+            Set<PedidoItem> pedidoItens = new HashSet<>();
+            for (PedidoItemDTO pedidoItem: pedidoDTO.getItens()){
+                Item i = itemService.findById(pedidoItem.getId());
+                PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
+                pedidoItens.add(pi);
+            }
+            pedido.setItens(pedidoItens);
+            pedidoItemRepository.saveAll(pedidoItens);
+            return repository.save(pedido);
+
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
     }
 
 }

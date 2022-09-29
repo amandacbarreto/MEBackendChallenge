@@ -1,7 +1,9 @@
 package br.me.desafio.challengeme.resources;
 
 import br.me.desafio.challengeme.DTO.PedidoDTO;
+import br.me.desafio.challengeme.DTO.PedidoItemDTO;
 import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
+import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,11 @@ public class PedidoResource {
         Pedido pedido = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
         return ResponseEntity.created(uri).body(pedido);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
+        Pedido pedido = service.update(id, obj);
+        return ResponseEntity.ok().body(pedido);
     }
 }
