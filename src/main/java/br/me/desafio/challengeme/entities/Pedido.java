@@ -19,7 +19,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany (mappedBy = "id.pedido")
+    @OneToMany (mappedBy = "id.pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PedidoItem> itens = new HashSet<>();
 
     public Pedido() {

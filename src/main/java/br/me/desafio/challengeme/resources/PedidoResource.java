@@ -40,6 +40,13 @@ public class PedidoResource {
         return ResponseEntity.created(uri).body(pedido);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<PedidoRespostaDTO> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
         PedidoRespostaDTO pedido = service.update(id, obj);
