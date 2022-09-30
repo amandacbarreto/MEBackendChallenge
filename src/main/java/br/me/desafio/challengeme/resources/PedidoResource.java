@@ -34,15 +34,15 @@ public class PedidoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> insert(@RequestBody PedidoDTO dto){
-        Pedido pedido = service.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
+    public ResponseEntity<PedidoRespostaDTO> insert(@RequestBody PedidoDTO dto){
+        PedidoRespostaDTO pedido = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getPedido()).toUri();
         return ResponseEntity.created(uri).body(pedido);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
-        Pedido pedido = service.update(id, obj);
+    public ResponseEntity<PedidoRespostaDTO> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
+        PedidoRespostaDTO pedido = service.update(id, obj);
         return ResponseEntity.ok().body(pedido);
     }
 }

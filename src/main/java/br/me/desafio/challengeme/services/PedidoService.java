@@ -47,23 +47,14 @@ public class PedidoService {
         }
     }
 
-    public Pedido insert (PedidoDTO dto) {
+    public PedidoRespostaDTO insert (PedidoDTO dto) {
 
         Pedido pedido = new Pedido();
-        Set<PedidoItem> pedidoItens = new HashSet<>();
-
-        for (PedidoItemDTO pedidoItem: dto.getItens()){
-            Item i = itemService.findById(pedidoItem.getId());
-            PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
-            pedidoItens.add(pi);
-        }
-        pedido.setItens(pedidoItens);
-        repository.save(pedido);
-        pedidoItemRepository.saveAll(pedidoItens);
-        return pedido;
+        pedido = this.savePedido(dto, pedido);
+        return pedido.convertToPedidoRespostaDTO();
     }
 
-    public Pedido update (Long id, PedidoDTO pedidoDTO){
+    public PedidoRespostaDTO update (Long id, PedidoDTO dto){
         try{
             Optional<Pedido> obj = repository.findById(id);
             Pedido pedido = obj.get();
@@ -73,18 +64,46 @@ public class PedidoService {
             }
 
             Set<PedidoItem> pedidoItens = new HashSet<>();
-            for (PedidoItemDTO pedidoItem: pedidoDTO.getItens()){
+            for (PedidoItemDTO pedidoItem: dto.getItens()){
                 Item i = itemService.findById(pedidoItem.getId());
                 PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
                 pedidoItens.add(pi);
             }
             pedido.setItens(pedidoItens);
             pedidoItemRepository.saveAll(pedidoItens);
-            return repository.save(pedido);
+            return repository.save(pedido).convertToPedidoRespostaDTO();
 
         } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException(id);
         }
     }
+
+    public Pedido savePedido (PedidoDTO dto, Pedido pedido){
+
+        /*Set<PedidoItem> pedidoItens = new HashSet<>();
+        for (PedidoItemDTO pedidoItem: dto.getItens()){
+            Item i = itemService.findById(pedidoItem.getId());
+            PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
+            pedidoItens.add(pi);
+        }
+        pedido.setItens(pedidoItens);*/
+        pedido = this.addItensToPedido(pedido, dto.getItens());
+        repository.save(pedido);
+        pedidoItemRepository.saveAll(pedido.getItens());
+        return pedido;
+    }
+
+    public Pedido addItensToPedido (Pedido pedido, List<PedidoItemDTO> itensDTO) {
+        Set<PedidoItem> pedidoItens = new HashSet<>();
+        for (PedidoItemDTO pedidoItem: itensDTO){
+            Item i = itemService.findById(pedidoItem.getId());
+            PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
+            pedidoItens.add(pi);
+        }
+        pedido.setItens(pedidoItens);
+        return pedido;
+    }
+
+
 
 }
