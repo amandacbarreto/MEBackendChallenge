@@ -15,13 +15,13 @@ public class Item  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
 
     public Item() {
 
     }
 
-    public Item(Long id, String descricao, Double precoUnitario) {
+    public Item(Long id, String descricao, BigDecimal precoUnitario) {
         this.id = id;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
@@ -43,11 +43,11 @@ public class Item  implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(Double precoUnitario) {
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 @Configuration
@@ -31,8 +32,8 @@ public class TestConfig implements CommandLineRunner {
         Pedido p1 = new Pedido(null);
         Pedido p2 = new Pedido(null);
         pedidoRepository.saveAll(Arrays.asList(p1,p2));
-        Item i1 = new Item(null, "Item A", 10.0);
-        Item i2 = new Item(null, "Item B", 5.0);
+        Item i1 = new Item(null, "Item A", new BigDecimal(10));
+        Item i2 = new Item(null, "Item B", new BigDecimal(5));
         itemRepository.saveAll(Arrays.asList(i1,i2));
         PedidoItem pi1 = new PedidoItem(p1, i1, 1, i1.getPrecoUnitario());
         PedidoItem pi2 = new PedidoItem(p1, i2, 2, i2.getPrecoUnitario());

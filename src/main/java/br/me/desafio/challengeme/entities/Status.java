@@ -18,12 +18,12 @@ public class Status  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer itensAprovados;
-    private Double valorAprovado;
+    private BigDecimal valorAprovado;
     private Pedido pedido;
     private StatusPedido statusInformado;
     private Set<StatusPedido> status  = new HashSet<>();
 
-    public Status(Integer itensAprovados, Double valorAprovado, Pedido pedido, StatusPedido statusInformado) {
+    public Status(Integer itensAprovados, BigDecimal valorAprovado, Pedido pedido, StatusPedido statusInformado) {
         this.id = id;
         this.itensAprovados = itensAprovados;
         this.valorAprovado = valorAprovado;
@@ -47,11 +47,11 @@ public class Status  implements Serializable {
         this.itensAprovados = itensAprovados;
     }
 
-    public Double getValorAprovado() {
+    public BigDecimal getValorAprovado() {
         return valorAprovado;
     }
 
-    public void setValorAprovado(Double valorAprovado) {
+    public void setValorAprovado(BigDecimal valorAprovado) {
         this.valorAprovado = valorAprovado;
     }
 
@@ -82,7 +82,7 @@ public class Status  implements Serializable {
 
     public Set<StatusPedido> checkStatus(StatusPedido statusPedido){
         status.clear();
-        Double valorPedido = pedido.precoTotal();
+        BigDecimal valorPedido = pedido.precoTotal();
         Integer itensPedido = pedido.itensTotal();
         System.out.println("Itens do Pedido: " + itensPedido);
         System.out.println("Itens aprovados: " + itensAprovados);
@@ -93,9 +93,8 @@ public class Status  implements Serializable {
                 StatusPedido statusTemp = (itensPedido>itensAprovados) ? StatusPedido.APROVADO_QTD_A_MENOR: StatusPedido.APROVADO_QTD_A_MAIOR;
                 status.add(statusTemp);
             }
-            if(valorPedido != valorAprovado){
-                System.out.println(Double.compare(valorPedido, valorAprovado));
-                StatusPedido statusTemp = (valorPedido>valorAprovado) ? StatusPedido.APROVADO_VALOR_A_MENOR: StatusPedido.APROVADO_VALOR_A_MAIOR;
+            if(valorPedido.compareTo(valorAprovado) != 0){
+                StatusPedido statusTemp = (valorPedido.compareTo(valorAprovado) > 0) ? StatusPedido.APROVADO_VALOR_A_MENOR: StatusPedido.APROVADO_VALOR_A_MAIOR;
                 status.add(statusTemp);
             }
             if(status.isEmpty()){

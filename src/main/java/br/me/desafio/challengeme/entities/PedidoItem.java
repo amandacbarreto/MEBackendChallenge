@@ -8,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -20,13 +21,13 @@ public class PedidoItem  implements Serializable {
     private PedidoItemPK id = new PedidoItemPK();
 
     private Integer quantidade;
-    private Double preco;
+    private BigDecimal preco;
 
     public PedidoItem() {
 
     }
 
-    public PedidoItem(Pedido pedido, Item item, Integer quantidade, Double preco) {
+    public PedidoItem(Pedido pedido, Item item, Integer quantidade, BigDecimal preco) {
         id.setPedido(pedido);
         id.setItem(item);
         this.quantidade = quantidade;
@@ -58,16 +59,17 @@ public class PedidoItem  implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
-    public Double getSubTotal() {
-        return preco * quantidade;
+    public BigDecimal getSubTotal() {
+        BigDecimal qtd = new BigDecimal(quantidade);
+        return preco.multiply(qtd);
     }
 
     public PedidoItemRespostaDTO convertToPedidoItemRespostaDTO() {

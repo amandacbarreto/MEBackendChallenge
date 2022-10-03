@@ -2,15 +2,17 @@ package br.me.desafio.challengeme.DTO;
 
 import br.me.desafio.challengeme.enums.StatusPedido;
 
+import java.math.BigDecimal;
+
 
 public class StatusDTO {
 
     private Integer itensAprovados;
-    private Double valorAprovado;
+    private BigDecimal valorAprovado;
     private Long pedido;
     private StatusPedido status;
 
-    public StatusDTO(Integer itensAprovados, Double valorAprovado, Long pedido, StatusPedido status) {
+    public StatusDTO(Integer itensAprovados, BigDecimal valorAprovado, Long pedido, StatusPedido status) {
         this.itensAprovados = itensAprovados;
         this.valorAprovado = valorAprovado;
         this.pedido = pedido;
@@ -25,11 +27,11 @@ public class StatusDTO {
         this.itensAprovados = itensAprovados;
     }
 
-    public Double getValorAprovado() {
+    public BigDecimal getValorAprovado() {
         return valorAprovado;
     }
 
-    public void setValorAprovado(Double valorAprovado) {
+    public void setValorAprovado(BigDecimal valorAprovado) {
         this.valorAprovado = valorAprovado;
     }
 
