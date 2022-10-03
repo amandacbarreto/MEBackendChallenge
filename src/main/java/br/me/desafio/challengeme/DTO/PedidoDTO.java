@@ -8,10 +8,10 @@ import java.util.Set;
 public class PedidoDTO {
 
     @JsonProperty("pedido")
-    private Long id;
+    private String id;
     private Set<ItemDTO> itens;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

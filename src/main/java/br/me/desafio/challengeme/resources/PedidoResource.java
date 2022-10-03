@@ -26,7 +26,7 @@ public class PedidoResource {
     }
 
    @GetMapping("/{id}")
-    public ResponseEntity<PedidoRespostaDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<PedidoRespostaDTO> findById(@PathVariable String id) {
         PedidoRespostaDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
@@ -41,13 +41,13 @@ public class PedidoResource {
 
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id){
+    public ResponseEntity<Void> delete (@PathVariable String id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PedidoRespostaDTO> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
+    public ResponseEntity<PedidoRespostaDTO> update(@PathVariable String id, @RequestBody PedidoDTO obj) {
         PedidoRespostaDTO pedido = service.update(id, obj);
         return ResponseEntity.ok().body(pedido);
     }

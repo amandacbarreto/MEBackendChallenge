@@ -21,9 +21,6 @@ import java.util.*;
 public class PedidoService {
 
     @Autowired
-    private ItemRepository itemRepository;
-
-    @Autowired
     private PedidoRepository repository;
 
     public List<PedidoRespostaDTO> findAll() {
@@ -35,7 +32,7 @@ public class PedidoService {
         return pedidosDTO;
     }
 
-    public PedidoRespostaDTO findById(Long id){
+    public PedidoRespostaDTO findById(String id){
         try{
             Optional<Pedido> obj = repository.findById(id);
             Pedido pedido = obj.get();
@@ -53,7 +50,7 @@ public class PedidoService {
         return pedido.convertToPedidoRespostaDTO();
     }
 
-    public void delete (Long id) {
+    public void delete (String id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e){
@@ -63,16 +60,11 @@ public class PedidoService {
         }
     }
 
-    public PedidoRespostaDTO update (Long id, PedidoDTO dto) {
+    public PedidoRespostaDTO update (String id, PedidoDTO dto) {
         try{
             Pedido pedido = repository.getReferenceById(id);
             pedido.getItens().clear();
-
-            for (ItemDTO itemDTO : dto.getItens()) {
-                Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQuantidade(),pedido);
-                pedido.getItens().add(i);
-            }
-
+            pedido = this.addItensToPedido(pedido, dto.getItens());
             return repository.save(pedido).convertToPedidoRespostaDTO();
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
@@ -81,16 +73,9 @@ public class PedidoService {
 
     public Pedido addItensToPedido (Pedido pedido, Set<ItemDTO> dto) {
         for (ItemDTO itemDTO : dto) {
-            Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQuantidade(),pedido);
+            Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQtd(),pedido);
             pedido.getItens().add(i);
         }
         return pedido;
-        /*Set<Item> pedidoItens = new HashSet<>();
-        for (ItemDTO pedidoItem: itensDTO){
-            Item i = new Item(null, pedidoItem.getDescricao(), pedidoItem.getPrecoUnitario(), pedidoItem.getQuantidade(),pedido);
-            pedidoItens.add(i);
-        }
-        pedido.setItens(pedidoItens);
-        return pedido;*/
     }
 }

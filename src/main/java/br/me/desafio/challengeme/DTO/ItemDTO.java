@@ -6,7 +6,7 @@ public class ItemDTO {
 
     private String descricao;
     private BigDecimal precoUnitario;
-    private Integer quantidade;
+    private Integer qtd;
 
     public String getDescricao() {
         return descricao;
@@ -16,8 +16,8 @@ public class ItemDTO {
         return precoUnitario;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public Integer getQtd() {
+        return qtd;
     }
 
 

@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class StatusRespostaDTO {
 
-    private Long pedido;
+    private String id;
     private Set<StatusPedido> status;
 
-    public StatusRespostaDTO(Long pedido, Set<StatusPedido> status) {
-        this.pedido = pedido;
+    public StatusRespostaDTO(String id, Set<StatusPedido> status) {
+        this.id = id;
         this.status = status;
     }
 
@@ -17,12 +17,12 @@ public class StatusRespostaDTO {
         this.status = status;
     }
 
-    public Long getPedido() {
-        return pedido;
+    public String getId() {
+        return id;
     }
 
-    public void setPedido(Long pedido) {
-        this.pedido = pedido;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Set<StatusPedido> getStatus() {

@@ -22,7 +22,7 @@ public class StatusResource {
     @PostMapping
     public ResponseEntity<StatusRespostaDTO> insert(@RequestBody StatusDTO dto){
         StatusRespostaDTO status = service.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(status.getPedido()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(status.getId()).toUri();
         return ResponseEntity.created(uri).body(status);
     }
 }

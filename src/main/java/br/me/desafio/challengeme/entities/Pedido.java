@@ -17,8 +17,7 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Item> itens = new HashSet<>();
@@ -27,20 +26,20 @@ public class Pedido implements Serializable {
 
     }
 
-    public Pedido(Long id) {
+    public Pedido(String id) {
         this.id = id;
     }
 
-    public Pedido(Long id, Set<Item> itens) {
+    public Pedido(String id, Set<Item> itens) {
         this.id = id;
         this.itens = itens;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,7 +70,7 @@ public class Pedido implements Serializable {
     public PedidoRespostaDTO convertToPedidoRespostaDTO() {
         Set<ItemRespostaDTO> pedidoItens = new HashSet<>();
         for (Item x: getItens()) {
-            pedidoItens.add(x.convertToPedidoItemRespostaDTO());
+            pedidoItens.add(x.convertToItemRespostaDTO());
         }
         return new PedidoRespostaDTO(id, pedidoItens);
     }

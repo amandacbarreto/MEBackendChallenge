@@ -83,7 +83,7 @@ public class Item  implements Serializable {
         return precoUnitario.multiply(qtd);
     }
 
-    public ItemRespostaDTO convertToPedidoItemRespostaDTO() {
+    public ItemRespostaDTO convertToItemRespostaDTO() {
         return new ItemRespostaDTO(descricao, precoUnitario, quantidade);
     }
 

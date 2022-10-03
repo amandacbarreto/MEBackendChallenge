@@ -24,8 +24,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Pedido p1 = new Pedido(1L);
-        Pedido p2 = new Pedido(2L);
+        Pedido p1 = new Pedido("1");
+        Pedido p2 = new Pedido("2");
         pedidoRepository.saveAll(Arrays.asList(p1,p2));
         Item i1 = new Item(null, "Item A", new BigDecimal(10),1,p1);
         Item i2 = new Item(null, "Item B", new BigDecimal(5),2,p1);

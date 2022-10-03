@@ -1,21 +1,24 @@
 package br.me.desafio.challengeme.DTO;
 
 import br.me.desafio.challengeme.enums.StatusPedido;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
 
 public class StatusDTO {
 
+    private StatusPedido status;
     private Integer itensAprovados;
     private BigDecimal valorAprovado;
-    private Long pedido;
-    private StatusPedido status;
+    @JsonProperty("pedido")
+    private String id;
+    
 
-    public StatusDTO(Integer itensAprovados, BigDecimal valorAprovado, Long pedido, StatusPedido status) {
+    public StatusDTO(Integer itensAprovados, BigDecimal valorAprovado, String id, StatusPedido status) {
         this.itensAprovados = itensAprovados;
         this.valorAprovado = valorAprovado;
-        this.pedido = pedido;
+        this.id = id;
         this.status = status;
     }
 
@@ -35,12 +38,12 @@ public class StatusDTO {
         this.valorAprovado = valorAprovado;
     }
 
-    public Long getPedido() {
-        return pedido;
+    public String getPedido() {
+        return id;
     }
 
-    public void setPedido(Long pedido) {
-        this.pedido = pedido;
+    public void setPedido(String id) {
+        this.id = id;
     }
 
     public StatusPedido getStatus() {
