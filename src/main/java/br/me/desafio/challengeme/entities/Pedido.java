@@ -17,7 +17,7 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -25,6 +25,10 @@ public class Pedido implements Serializable {
 
     public Pedido() {
 
+    }
+
+    public Pedido(Long id) {
+        this.id = id;
     }
 
     public Pedido(Long id, Set<Item> itens) {

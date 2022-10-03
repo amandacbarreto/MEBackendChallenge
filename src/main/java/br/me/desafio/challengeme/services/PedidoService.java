@@ -21,9 +21,6 @@ import java.util.*;
 public class PedidoService {
 
     @Autowired
-    private ItemService itemService;
-
-    @Autowired
     private ItemRepository itemRepository;
 
     @Autowired
@@ -50,11 +47,9 @@ public class PedidoService {
 
 
     public PedidoRespostaDTO insert (PedidoDTO dto) {
-
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(dto.getId());
         pedido = this.addItensToPedido(pedido, dto.getItens());
         repository.save(pedido);
-        itemRepository.saveAll(pedido.getItens());
         return pedido.convertToPedidoRespostaDTO();
     }
 
