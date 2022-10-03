@@ -21,22 +21,10 @@ public class StatusService {
         Pedido pedido = obj.get();
         Set<StatusPedido> statusList = new HashSet<>();
         Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido,dto.getStatus());
-        statusList.add(dto.getStatus());
-        StatusRespostaDTO resposta = new StatusRespostaDTO(pedido.getId(), statusList);
-        return resposta;
-    }
-
-    public Status insert2 (StatusDTO dto) {
-        Optional<Pedido> obj = pedidoRepository.findById(dto.getPedido());
-
-        Pedido pedido = obj.get();
-        Set<StatusPedido> statusList = new HashSet<>();
-        Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido,dto.getStatus());
         for(StatusPedido s : status.checkStatus(dto.getStatus())){
             statusList.add(s);
         }
         status.setStatus(statusList);
-        return status;
+        return status.convertToStatusRespostaDTO();
     }
-
 }

@@ -25,12 +25,4 @@ public class StatusResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(status.getPedido()).toUri();
         return ResponseEntity.created(uri).body(status);
     }
-
-    @PostMapping(value = "/2")
-    public ResponseEntity<Status> insert2(@RequestBody StatusDTO dto){
-        Status status = service.insert2(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(status.getPedido()).toUri();
-        return ResponseEntity.created(uri).body(status);
-    }
-
 }

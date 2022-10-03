@@ -84,10 +84,6 @@ public class Status  implements Serializable {
         status.clear();
         BigDecimal valorPedido = pedido.precoTotal();
         Integer itensPedido = pedido.itensTotal();
-        System.out.println("Itens do Pedido: " + itensPedido);
-        System.out.println("Itens aprovados: " + itensAprovados);
-        System.out.println("Valor do pedido: " + valorPedido);
-        System.out.println("Valor aprovado: " + valorAprovado);
         if (statusPedido.equals(StatusPedido.APROVADO)){
             if(itensPedido != itensAprovados){
                 StatusPedido statusTemp = (itensPedido>itensAprovados) ? StatusPedido.APROVADO_QTD_A_MENOR: StatusPedido.APROVADO_QTD_A_MAIOR;
