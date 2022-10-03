@@ -1,14 +1,13 @@
 package br.me.desafio.challengeme.DTO;
 
-import br.me.desafio.challengeme.entities.Pedido;
-
 import java.util.List;
+import java.util.Set;
 
 public class PedidoDTO {
 
-    private List<PedidoItemDTO> itens;
+    private Set<ItemDTO> itens;
 
-    public List<PedidoItemDTO> getItens() {
+    public Set<ItemDTO> getItens() {
         return itens;
     }
 

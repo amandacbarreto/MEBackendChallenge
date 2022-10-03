@@ -1,9 +1,7 @@
 package br.me.desafio.challengeme.resources;
 
 import br.me.desafio.challengeme.DTO.PedidoDTO;
-import br.me.desafio.challengeme.DTO.PedidoItemDTO;
 import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
-import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +25,12 @@ public class PedidoResource {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/{id}")
+   @GetMapping("/{id}")
     public ResponseEntity<PedidoRespostaDTO> findById(@PathVariable Long id) {
         PedidoRespostaDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
 
     @PostMapping
     public ResponseEntity<PedidoRespostaDTO> insert(@RequestBody PedidoDTO dto){
@@ -40,12 +39,12 @@ public class PedidoResource {
         return ResponseEntity.created(uri).body(pedido);
     }
 
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete (@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<PedidoRespostaDTO> update(@PathVariable Long id, @RequestBody PedidoDTO obj) {
