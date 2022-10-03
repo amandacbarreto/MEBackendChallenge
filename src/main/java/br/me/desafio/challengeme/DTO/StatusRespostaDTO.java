@@ -13,6 +13,10 @@ public class StatusRespostaDTO {
         this.status = status;
     }
 
+    public StatusRespostaDTO(Set<StatusPedido> status) {
+        this.status = status;
+    }
+
     public Long getPedido() {
         return pedido;
     }

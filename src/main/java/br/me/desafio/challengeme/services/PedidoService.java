@@ -1,13 +1,11 @@
 package br.me.desafio.challengeme.services;
 
+import br.me.desafio.challengeme.DTO.ItemDTO;
 import br.me.desafio.challengeme.DTO.PedidoDTO;
-import br.me.desafio.challengeme.DTO.PedidoItemDTO;
-import br.me.desafio.challengeme.DTO.PedidoItemRespostaDTO;
 import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
-import br.me.desafio.challengeme.entities.PedidoItem;
-import br.me.desafio.challengeme.repositories.PedidoItemRepository;
+import br.me.desafio.challengeme.repositories.ItemRepository;
 import br.me.desafio.challengeme.repositories.PedidoRepository;
 import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
@@ -26,10 +24,10 @@ public class PedidoService {
     private ItemService itemService;
 
     @Autowired
-    private PedidoRepository repository;
+    private ItemRepository itemRepository;
 
     @Autowired
-    private PedidoItemRepository pedidoItemRepository;
+    private PedidoRepository repository;
 
     public List<PedidoRespostaDTO> findAll() {
         List<Pedido> pedidos = repository.findAll();
@@ -50,12 +48,13 @@ public class PedidoService {
         }
     }
 
+
     public PedidoRespostaDTO insert (PedidoDTO dto) {
 
         Pedido pedido = new Pedido();
         pedido = this.addItensToPedido(pedido, dto.getItens());
         repository.save(pedido);
-        pedidoItemRepository.saveAll(pedido.getItens());
+        itemRepository.saveAll(pedido.getItens());
         return pedido.convertToPedidoRespostaDTO();
     }
 
@@ -69,35 +68,34 @@ public class PedidoService {
         }
     }
 
-    public PedidoRespostaDTO update (Long id, PedidoDTO dto){
+    public PedidoRespostaDTO update (Long id, PedidoDTO dto) {
         try{
-            Optional<Pedido> obj = repository.findById(id);
-            Pedido pedido = obj.get();
+            Pedido pedido = repository.getReferenceById(id);
+            pedido.getItens().clear();
 
-            for (PedidoItem pedidoItem: pedido.getItens()){
-                pedidoItemRepository.delete(pedidoItem);
+            for (ItemDTO itemDTO : dto.getItens()) {
+                Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQuantidade(),pedido);
+                pedido.getItens().add(i);
             }
 
-            pedido = this.addItensToPedido(pedido, dto.getItens());
-            pedidoItemRepository.saveAll(pedido.getItens());
             return repository.save(pedido).convertToPedidoRespostaDTO();
-
-        } catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    public Pedido addItensToPedido (Pedido pedido, List<PedidoItemDTO> itensDTO) {
-        Set<PedidoItem> pedidoItens = new HashSet<>();
-        for (PedidoItemDTO pedidoItem: itensDTO){
-            Item i = itemService.findById(pedidoItem.getId());
-            PedidoItem pi = new PedidoItem(pedido, i, pedidoItem.getQuantidade(), i.getPrecoUnitario());
-            pedidoItens.add(pi);
+    public Pedido addItensToPedido (Pedido pedido, Set<ItemDTO> dto) {
+        for (ItemDTO itemDTO : dto) {
+            Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQuantidade(),pedido);
+            pedido.getItens().add(i);
+        }
+        return pedido;
+        /*Set<Item> pedidoItens = new HashSet<>();
+        for (ItemDTO pedidoItem: itensDTO){
+            Item i = new Item(null, pedidoItem.getDescricao(), pedidoItem.getPrecoUnitario(), pedidoItem.getQuantidade(),pedido);
+            pedidoItens.add(i);
         }
         pedido.setItens(pedidoItens);
-        return pedido;
+        return pedido;*/
     }
-
-
-
 }

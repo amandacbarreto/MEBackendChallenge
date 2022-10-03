@@ -1,6 +1,6 @@
 package br.me.desafio.challengeme.entities;
 
-import br.me.desafio.challengeme.DTO.PedidoItemRespostaDTO;
+import br.me.desafio.challengeme.DTO.ItemRespostaDTO;
 import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 
 import javax.persistence.*;
@@ -20,14 +20,15 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany (mappedBy = "id.pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PedidoItem> itens = new HashSet<>();
+    @OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Item> itens = new HashSet<>();
 
     public Pedido() {
 
     }
 
-    public Pedido (Set<PedidoItem> itens) {
+    public Pedido(Long id, Set<Item> itens) {
+        this.id = id;
         this.itens = itens;
     }
 
@@ -39,17 +40,17 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Set<PedidoItem> getItens() {
+    public Set<Item> getItens() {
         return itens;
     }
 
-    public void setItens(Set<PedidoItem> itens) {
+    public void setItens(Set<Item> itens) {
         this.itens = itens;
     }
 
     public BigDecimal precoTotal() {
         BigDecimal soma = new BigDecimal(0);
-        for (PedidoItem x: itens) {
+        for (Item x: itens) {
             soma = soma.add(x.getSubTotal());
         }
         return soma;
@@ -57,15 +58,15 @@ public class Pedido implements Serializable {
 
     public Integer itensTotal() {
         int soma = 0;
-        for (PedidoItem x: itens) {
+        for (Item x: itens) {
             soma += x.getQuantidade();
         }
         return soma;
     }
 
     public PedidoRespostaDTO convertToPedidoRespostaDTO() {
-        Set<PedidoItemRespostaDTO> pedidoItens = new HashSet<>();
-        for (PedidoItem x: getItens()) {
+        Set<ItemRespostaDTO> pedidoItens = new HashSet<>();
+        for (Item x: getItens()) {
             pedidoItens.add(x.convertToPedidoItemRespostaDTO());
         }
         return new PedidoRespostaDTO(id, pedidoItens);

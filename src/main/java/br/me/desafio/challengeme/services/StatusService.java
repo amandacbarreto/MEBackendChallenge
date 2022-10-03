@@ -18,6 +18,13 @@ public class StatusService {
 
     public StatusRespostaDTO insert (StatusDTO dto) {
         Optional<Pedido> obj = pedidoRepository.findById(dto.getPedido());
+        if (obj.isEmpty()){
+            /*Set<StatusPedido> statusList = new HashSet<>();
+            statusList.add(StatusPedido.CODIGO_PEDIDO_INVALIDO);
+            return new StatusRespostaDTO(dto.getPedido(), statusList);*/
+            return new StatusRespostaDTO(dto.getPedido(), Set.of(StatusPedido.CODIGO_PEDIDO_INVALIDO));
+
+        }
         Pedido pedido = obj.get();
         Set<StatusPedido> statusList = new HashSet<>();
         Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido,dto.getStatus());

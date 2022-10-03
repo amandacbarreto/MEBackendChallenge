@@ -1,14 +1,13 @@
 package br.me.desafio.challengeme.DTO;
 
-import java.util.List;
 import java.util.Set;
 
 public class PedidoRespostaDTO {
 
     private Long pedido;
-    private Set<PedidoItemRespostaDTO> itens;
+    private Set<ItemRespostaDTO> itens;
 
-    public PedidoRespostaDTO(Long pedido, Set<PedidoItemRespostaDTO> itens) {
+    public PedidoRespostaDTO(Long pedido, Set<ItemRespostaDTO> itens) {
         this.pedido = pedido;
         this.itens = itens;
     }
@@ -17,7 +16,7 @@ public class PedidoRespostaDTO {
         return pedido;
     }
 
-    public Set<PedidoItemRespostaDTO> getItens() {
+    public Set<ItemRespostaDTO> getItens() {
         return itens;
     }
 
