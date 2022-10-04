@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -20,7 +21,7 @@ public class StatusResource {
     private StatusService service;
 
     @PostMapping
-    public ResponseEntity<StatusRespostaDTO> insert(@RequestBody StatusDTO dto){
+    public ResponseEntity<StatusRespostaDTO> insert(@Valid @RequestBody StatusDTO dto){
         StatusRespostaDTO status = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(status.getId()).toUri();
         return ResponseEntity.created(uri).body(status);

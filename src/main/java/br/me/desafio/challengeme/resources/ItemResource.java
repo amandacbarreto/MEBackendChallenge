@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ItemResource {
     }
 
     @PostMapping
-    public ResponseEntity<Item> insert(@RequestBody Item obj){
+    public ResponseEntity<Item> insert(@Valid @RequestBody Item obj){
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
@@ -43,7 +44,7 @@ public class ItemResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Item> update(@PathVariable Long id, @RequestBody Item obj) {
+    public ResponseEntity<Item> update(@Valid @PathVariable Long id, @RequestBody Item obj) {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }

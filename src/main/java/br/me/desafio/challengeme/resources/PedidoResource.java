@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class PedidoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> insert(@RequestBody PedidoDTO dto){
+    public ResponseEntity<Pedido> insert(@Valid @RequestBody PedidoDTO dto){
         Pedido pedido = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
         return ResponseEntity.created(uri).body(pedido);
@@ -45,7 +46,7 @@ public class PedidoResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Pedido> update(@PathVariable String id, @RequestBody PedidoDTO obj) {
+    public ResponseEntity<Pedido> update(@Valid @PathVariable String id, @RequestBody PedidoDTO obj) {
         Pedido pedido = service.update(id, obj);
         return ResponseEntity.ok().body(pedido);
     }
