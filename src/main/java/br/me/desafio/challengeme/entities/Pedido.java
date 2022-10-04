@@ -1,14 +1,11 @@
 package br.me.desafio.challengeme.entities;
 
-import br.me.desafio.challengeme.DTO.ItemRespostaDTO;
-import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -17,10 +14,11 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @JsonProperty("pedido")
     private String id;
 
     @OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Item> itens = new HashSet<>();
+    private List<Item> itens = new ArrayList<>();
 
     public Pedido() {
 
@@ -30,7 +28,7 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Pedido(String id, Set<Item> itens) {
+    public Pedido(String id, List<Item> itens) {
         this.id = id;
         this.itens = itens;
     }
@@ -43,11 +41,11 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Set<Item> getItens() {
+    public List<Item> getItens() {
         return itens;
     }
 
-    public void setItens(Set<Item> itens) {
+    public void setItens(List<Item> itens) {
         this.itens = itens;
     }
 
@@ -66,15 +64,6 @@ public class Pedido implements Serializable {
         }
         return soma;
     }
-
-    public PedidoRespostaDTO convertToPedidoRespostaDTO() {
-        Set<ItemRespostaDTO> pedidoItens = new HashSet<>();
-        for (Item x: getItens()) {
-            pedidoItens.add(x.convertToItemRespostaDTO());
-        }
-        return new PedidoRespostaDTO(id, pedidoItens);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -22,35 +22,19 @@ public class StatusDTO {
         this.status = status;
     }
 
-    public Integer getItensAprovados() {
-        return itensAprovados;
+    public StatusPedido getStatus() {
+        return status;
     }
 
-    public void setItensAprovados(Integer itensAprovados) {
-        this.itensAprovados = itensAprovados;
+    public Integer getItensAprovados() {
+        return itensAprovados;
     }
 
     public BigDecimal getValorAprovado() {
         return valorAprovado;
     }
 
-    public void setValorAprovado(BigDecimal valorAprovado) {
-        this.valorAprovado = valorAprovado;
-    }
-
-    public String getPedido() {
+    public String getId() {
         return id;
-    }
-
-    public void setPedido(String id) {
-        this.id = id;
-    }
-
-    public StatusPedido getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusPedido status) {
-        this.status = status;
     }
 }

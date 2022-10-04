@@ -2,10 +2,8 @@ package br.me.desafio.challengeme.services;
 
 import br.me.desafio.challengeme.DTO.ItemDTO;
 import br.me.desafio.challengeme.DTO.PedidoDTO;
-import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
-import br.me.desafio.challengeme.repositories.ItemRepository;
 import br.me.desafio.challengeme.repositories.PedidoRepository;
 import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
@@ -23,7 +21,7 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repository;
 
-    public List<PedidoRespostaDTO> findAll() {
+    /*public List<PedidoRespostaDTO> findAll() {
         List<Pedido> pedidos = repository.findAll();
         List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
         for (Pedido pedido : pedidos){
@@ -31,23 +29,27 @@ public class PedidoService {
         }
         return pedidosDTO;
     }
+*/
+    public List<Pedido> findAll() {
+        return repository.findAll();
+    }
 
-    public PedidoRespostaDTO findById(String id){
+    public Pedido findById(String id){
         try{
             Optional<Pedido> obj = repository.findById(id);
             Pedido pedido = obj.get();
-            return pedido.convertToPedidoRespostaDTO();
+            return pedido;
         } catch (NoSuchElementException e){
             throw new ResourceNotFoundException(id);
         }
     }
 
 
-    public PedidoRespostaDTO insert (PedidoDTO dto) {
+    public Pedido insert (PedidoDTO dto) {
         Pedido pedido = new Pedido(dto.getId());
         pedido = this.addItensToPedido(pedido, dto.getItens());
         repository.save(pedido);
-        return pedido.convertToPedidoRespostaDTO();
+        return pedido;
     }
 
     public void delete (String id) {
@@ -60,7 +62,7 @@ public class PedidoService {
         }
     }
 
-    public PedidoRespostaDTO update (String id, PedidoDTO dto) {
+    /*public PedidoRespostaDTO update (String id, PedidoDTO dto) {
         try{
             Pedido pedido = repository.getReferenceById(id);
             pedido.getItens().clear();
@@ -69,10 +71,22 @@ public class PedidoService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
+    }*/
+
+    public Pedido update (String id, PedidoDTO dto) {
+        try{
+            Pedido pedido = repository.getReferenceById(id);
+            pedido.getItens().clear();
+            pedido = this.addItensToPedido(pedido, dto.getItens());
+            return repository.save(pedido);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
-    public Pedido addItensToPedido (Pedido pedido, Set<ItemDTO> dto) {
+    public Pedido addItensToPedido (Pedido pedido, List<ItemDTO> dto) {
         for (ItemDTO itemDTO : dto) {
+            System.out.println("Quantidade: "+itemDTO.getQtd());
             Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQtd(),pedido);
             pedido.getItens().add(i);
         }

@@ -1,7 +1,7 @@
 package br.me.desafio.challengeme.entities;
 
-import br.me.desafio.challengeme.DTO.ItemRespostaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,10 +15,13 @@ public class Item  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
     private BigDecimal precoUnitario;
+
+    @JsonProperty("qtd")
     private Integer quantidade;
 
     @JsonIgnore
@@ -78,13 +81,10 @@ public class Item  implements Serializable {
         this.pedido = pedido;
     }
 
+    @JsonIgnore
     public BigDecimal getSubTotal() {
         BigDecimal qtd = new BigDecimal(quantidade);
         return precoUnitario.multiply(qtd);
-    }
-
-    public ItemRespostaDTO convertToItemRespostaDTO() {
-        return new ItemRespostaDTO(descricao, precoUnitario, quantidade);
     }
 
     @Override

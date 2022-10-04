@@ -1,7 +1,6 @@
 package br.me.desafio.challengeme.resources;
 
 import br.me.desafio.challengeme.DTO.PedidoDTO;
-import br.me.desafio.challengeme.DTO.PedidoRespostaDTO;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +19,21 @@ public class PedidoResource {
     private PedidoService service;
 
     @GetMapping
-    public ResponseEntity<List<PedidoRespostaDTO>> findAll() {
-        List<PedidoRespostaDTO> list = service.findAll();
+    public ResponseEntity<List<Pedido>> findAll() {
+        List<Pedido> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
    @GetMapping("/{id}")
-    public ResponseEntity<PedidoRespostaDTO> findById(@PathVariable String id) {
-        PedidoRespostaDTO obj = service.findById(id);
+    public ResponseEntity<Pedido> findById(@PathVariable String id) {
+        Pedido obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
 
     @PostMapping
-    public ResponseEntity<PedidoRespostaDTO> insert(@RequestBody PedidoDTO dto){
-        PedidoRespostaDTO pedido = service.insert(dto);
+    public ResponseEntity<Pedido> insert(@RequestBody PedidoDTO dto){
+        Pedido pedido = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
         return ResponseEntity.created(uri).body(pedido);
     }
@@ -47,8 +46,8 @@ public class PedidoResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PedidoRespostaDTO> update(@PathVariable String id, @RequestBody PedidoDTO obj) {
-        PedidoRespostaDTO pedido = service.update(id, obj);
+    public ResponseEntity<Pedido> update(@PathVariable String id, @RequestBody PedidoDTO obj) {
+        Pedido pedido = service.update(id, obj);
         return ResponseEntity.ok().body(pedido);
     }
 }

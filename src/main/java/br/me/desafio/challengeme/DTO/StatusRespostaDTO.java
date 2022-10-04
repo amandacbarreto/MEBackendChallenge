@@ -1,19 +1,23 @@
 package br.me.desafio.challengeme.DTO;
 
 import br.me.desafio.challengeme.enums.StatusPedido;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatusRespostaDTO {
 
+    @JsonProperty("pedido")
     private String id;
-    private Set<StatusPedido> status;
+    private List<StatusPedido> status = new ArrayList<>();
 
-    public StatusRespostaDTO(String id, Set<StatusPedido> status) {
+    public StatusRespostaDTO(String id, List<StatusPedido> status) {
         this.id = id;
         this.status = status;
     }
 
-    public StatusRespostaDTO(Set<StatusPedido> status) {
+    public StatusRespostaDTO(List<StatusPedido> status) {
         this.status = status;
     }
 
@@ -25,11 +29,11 @@ public class StatusRespostaDTO {
         this.id = id;
     }
 
-    public Set<StatusPedido> getStatus() {
+    public List<StatusPedido> getStatus() {
         return status;
     }
 
-    public void setStatus(Set<StatusPedido> status) {
+    public void setStatus(List<StatusPedido> status) {
         this.status = status;
     }
 }

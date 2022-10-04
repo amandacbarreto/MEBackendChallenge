@@ -17,17 +17,13 @@ public class StatusService {
     private PedidoRepository pedidoRepository;
 
     public StatusRespostaDTO insert (StatusDTO dto) {
-        Optional<Pedido> obj = pedidoRepository.findById(dto.getPedido());
+        Optional<Pedido> obj = pedidoRepository.findById(dto.getId());
         if (obj.isEmpty()){
-            return new StatusRespostaDTO(dto.getPedido(), Set.of(StatusPedido.CODIGO_PEDIDO_INVALIDO));
+            return new StatusRespostaDTO(dto.getId(), List.of(StatusPedido.CODIGO_PEDIDO_INVALIDO));
         }
         Pedido pedido = obj.get();
-        Set<StatusPedido> statusList = new HashSet<>();
-        Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido,dto.getStatus());
-        for(StatusPedido s : status.checkStatus(dto.getStatus())){
-            statusList.add(s);
-        }
-        status.setStatus(statusList);
+        Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido);
+        status.checkStatus(dto.getStatus());
         return status.convertToStatusRespostaDTO();
     }
 }

@@ -2,20 +2,20 @@ package br.me.desafio.challengeme.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class PedidoDTO {
 
     @JsonProperty("pedido")
     private String id;
-    private Set<ItemDTO> itens;
+    private List<ItemDTO> itens = new ArrayList<>();
 
     public String getId() {
         return id;
     }
 
-    public Set<ItemDTO> getItens() {
+    public List<ItemDTO> getItens() {
         return itens;
     }
 
