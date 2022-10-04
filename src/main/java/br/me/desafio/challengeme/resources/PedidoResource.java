@@ -30,7 +30,6 @@ public class PedidoResource {
         return ResponseEntity.ok().body(obj);
     }
 
-
     @PostMapping
     public ResponseEntity<Pedido> insert(@RequestBody PedidoDTO dto){
         Pedido pedido = service.insert(dto);

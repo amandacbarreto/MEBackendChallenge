@@ -21,15 +21,6 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repository;
 
-    /*public List<PedidoRespostaDTO> findAll() {
-        List<Pedido> pedidos = repository.findAll();
-        List<PedidoRespostaDTO>  pedidosDTO = new ArrayList<>();
-        for (Pedido pedido : pedidos){
-            pedidosDTO.add(pedido.convertToPedidoRespostaDTO());
-        }
-        return pedidosDTO;
-    }
-*/
     public List<Pedido> findAll() {
         return repository.findAll();
     }
@@ -62,17 +53,6 @@ public class PedidoService {
         }
     }
 
-    /*public PedidoRespostaDTO update (String id, PedidoDTO dto) {
-        try{
-            Pedido pedido = repository.getReferenceById(id);
-            pedido.getItens().clear();
-            pedido = this.addItensToPedido(pedido, dto.getItens());
-            return repository.save(pedido).convertToPedidoRespostaDTO();
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
-        }
-    }*/
-
     public Pedido update (String id, PedidoDTO dto) {
         try{
             Pedido pedido = repository.getReferenceById(id);
@@ -85,10 +65,9 @@ public class PedidoService {
     }
 
     public Pedido addItensToPedido (Pedido pedido, List<ItemDTO> dto) {
-        for (ItemDTO itemDTO : dto) {
-            System.out.println("Quantidade: "+itemDTO.getQtd());
-            Item i = new Item(null, itemDTO.getDescricao(), itemDTO.getPrecoUnitario(), itemDTO.getQtd(),pedido);
-            pedido.getItens().add(i);
+        for (ItemDTO i : dto) {
+            Item item = new Item(null, i.getDescricao(), i.getPrecoUnitario(), i.getQtd(), pedido);
+            pedido.getItens().add(item);
         }
         return pedido;
     }

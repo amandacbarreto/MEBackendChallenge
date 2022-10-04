@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Status  implements Serializable {
 
@@ -24,7 +25,6 @@ public class Status  implements Serializable {
     private List<StatusPedido> status;
 
     public Status(Integer itensAprovados, BigDecimal valorAprovado, Pedido pedido) {
-        this.id = id;
         this.itensAprovados = itensAprovados;
         this.valorAprovado = valorAprovado;
         this.pedido = pedido;
@@ -81,32 +81,32 @@ public class Status  implements Serializable {
 
     public void checkStatus(StatusPedido statusPedido){
         List<StatusPedido> list = new ArrayList<>();
-        BigDecimal valorPedido = pedido.precoTotal();
-        Integer itensPedido = pedido.itensTotal();
-        System.out.println("Itens pedidos: "+ itensPedido);
-        System.out.println("Itens aprovados: "+ itensAprovados);
-        System.out.println("Valor pedido: "+ valorPedido);
-        System.out.println("Valor aprovado: "+ valorAprovado);
         if (statusPedido.equals(StatusPedido.APROVADO)){
-            if(valorPedido.compareTo(valorAprovado) != 0){
-                StatusPedido statusTemp = (valorPedido.compareTo(valorAprovado) > 0) ? StatusPedido.APROVADO_VALOR_A_MENOR: StatusPedido.APROVADO_VALOR_A_MAIOR;
-                list.add(statusTemp);
-            }
-            if(itensPedido != itensAprovados){
-                StatusPedido statusTemp = (itensPedido>itensAprovados) ? StatusPedido.APROVADO_QTD_A_MENOR: StatusPedido.APROVADO_QTD_A_MAIOR;
-                list.add(statusTemp);
-            }
-            if(list.isEmpty()){
-                list.add(StatusPedido.APROVADO);
-            }
+            if (this.checkValor().isPresent()) list.add(this.checkValor().get());
+            if (this.checkItens().isPresent()) list.add(this.checkItens().get());
+            if (list.isEmpty()) list.add(StatusPedido.APROVADO);
         } else {
             list.add(StatusPedido.REPROVADO);
         }
-        System.out.println(list);
         this.setStatus(list);
     }
+    public Optional<StatusPedido> checkValor(){
+        int comparison = pedido.precoTotal().compareTo(valorAprovado);
+        if(comparison != 0){
+            return (comparison > 0) ? Optional.of(StatusPedido.APROVADO_VALOR_A_MENOR): Optional.of(StatusPedido.APROVADO_VALOR_A_MAIOR);
+        }
+        return Optional.empty();
+    }
 
-    public StatusRespostaDTO convertToStatusRespostaDTO() {
+    public Optional<StatusPedido> checkItens(){
+        int comparison = pedido.itensTotal().compareTo(itensAprovados);
+        if(comparison != 0){
+            return (comparison > 0) ? Optional.of(StatusPedido.APROVADO_QTD_A_MENOR): Optional.of(StatusPedido.APROVADO_QTD_A_MAIOR);
+        }
+        return Optional.empty();
+    }
+
+    public StatusRespostaDTO convertToDTO() {
         return new StatusRespostaDTO(pedido.getId(), status);
     }
 

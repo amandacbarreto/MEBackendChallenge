@@ -18,12 +18,12 @@ public class StatusService {
 
     public StatusRespostaDTO insert (StatusDTO dto) {
         Optional<Pedido> obj = pedidoRepository.findById(dto.getId());
-        if (obj.isEmpty()){
+        if (obj.isEmpty()) {
             return new StatusRespostaDTO(dto.getId(), List.of(StatusPedido.CODIGO_PEDIDO_INVALIDO));
         }
         Pedido pedido = obj.get();
         Status status = new Status(dto.getItensAprovados(),dto.getValorAprovado(),pedido);
         status.checkStatus(dto.getStatus());
-        return status.convertToStatusRespostaDTO();
+        return status.convertToDTO();
     }
 }

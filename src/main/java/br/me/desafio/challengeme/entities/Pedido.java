@@ -51,8 +51,8 @@ public class Pedido implements Serializable {
 
     public BigDecimal precoTotal() {
         BigDecimal soma = new BigDecimal(0);
-        for (Item x: itens) {
-            soma = soma.add(x.getSubTotal());
+        for (Item i: itens) {
+            soma = soma.add(i.getSubTotal());
         }
         return soma;
     }
