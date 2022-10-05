@@ -118,7 +118,8 @@ http://localhost:8080/h2-console
 ```
 
 Utilize os seguintes dados:
-User Name:  **sa** 
-Não possui senha.
+
+- User Name:  **sa** 
+- Não possui senha.
 
 
