@@ -18,7 +18,9 @@ public class Item  implements Serializable {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String descricao;
+
     private BigDecimal precoUnitario;
 
     @JsonProperty("qtd")
@@ -81,8 +83,8 @@ public class Item  implements Serializable {
         this.pedido = pedido;
     }
 
-    @JsonIgnore
-    public BigDecimal getSubTotal() {
+
+    public BigDecimal subTotal() {
         BigDecimal qtd = new BigDecimal(quantidade);
         return precoUnitario.multiply(qtd);
     }

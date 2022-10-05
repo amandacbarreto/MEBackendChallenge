@@ -91,17 +91,17 @@ public class Status  implements Serializable {
         this.setStatus(list);
     }
     public Optional<StatusPedido> checkValor(){
-        int comparison = pedido.precoTotal().compareTo(valorAprovado);
-        if(comparison != 0){
-            return (comparison > 0) ? Optional.of(StatusPedido.APROVADO_VALOR_A_MENOR): Optional.of(StatusPedido.APROVADO_VALOR_A_MAIOR);
+        int priceComparison = pedido.precoTotal().compareTo(valorAprovado);
+        if(priceComparison != 0){
+            return (priceComparison > 0) ? Optional.of(StatusPedido.APROVADO_VALOR_A_MENOR): Optional.of(StatusPedido.APROVADO_VALOR_A_MAIOR);
         }
         return Optional.empty();
     }
 
     public Optional<StatusPedido> checkItens(){
-        int comparison = pedido.itensTotal().compareTo(itensAprovados);
-        if(comparison != 0){
-            return (comparison > 0) ? Optional.of(StatusPedido.APROVADO_QTD_A_MENOR): Optional.of(StatusPedido.APROVADO_QTD_A_MAIOR);
+        int itemComparison = pedido.itensTotal().compareTo(itensAprovados);
+        if(itemComparison != 0){
+            return (itemComparison > 0) ? Optional.of(StatusPedido.APROVADO_QTD_A_MENOR): Optional.of(StatusPedido.APROVADO_QTD_A_MAIOR);
         }
         return Optional.empty();
     }

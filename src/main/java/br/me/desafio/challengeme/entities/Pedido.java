@@ -52,7 +52,7 @@ public class Pedido implements Serializable {
     public BigDecimal precoTotal() {
         BigDecimal soma = new BigDecimal(0);
         for (Item i: itens) {
-            soma = soma.add(i.getSubTotal());
+            soma = soma.add(i.subTotal());
         }
         return soma;
     }

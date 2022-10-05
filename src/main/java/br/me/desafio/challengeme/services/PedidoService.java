@@ -13,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -29,8 +30,7 @@ public class PedidoService {
     public Pedido findById(String id){
         try{
             Optional<Pedido> obj = repository.findById(id);
-            Pedido pedido = obj.get();
-            return pedido;
+            return obj.get();
         } catch (NoSuchElementException e){
             throw new ResourceNotFoundException(id);
         }
@@ -49,15 +49,12 @@ public class PedidoService {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e){
             throw new ResourceNotFoundException(id);
-        } catch (DataIntegrityViolationException e){
-            throw new DatabaseException(e.getMessage());
         }
     }
 
     public Pedido update (String id, PedidoDTO dto) {
         try{
             Pedido pedido = repository.getReferenceById(id);
-            pedido.getItens().clear();
             pedido = this.addItensToPedido(pedido, dto.getItens());
             return repository.save(pedido);
         } catch (EntityNotFoundException e) {
@@ -66,6 +63,7 @@ public class PedidoService {
     }
 
     public Pedido addItensToPedido (Pedido pedido, List<ItemDTO> dto) {
+        pedido.getItens().clear();
         for (ItemDTO i : dto) {
             Item item = new Item(null, i.getDescricao(), i.getPrecoUnitario(), i.getQtd(), pedido);
             pedido.getItens().add(item);
