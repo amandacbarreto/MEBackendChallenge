@@ -6,7 +6,7 @@
 
  ## Primeios passos
 
-1. Se necessário, instale [Maven](http://maven.apache.org/install.html))
+1. Se necessário, instale [Maven](http://maven.apache.org/install.html)
 
 2. Faça o `clone` do projeto com o seguinte comando: 
 
