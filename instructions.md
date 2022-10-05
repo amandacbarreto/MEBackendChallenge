@@ -53,7 +53,7 @@ content-type: application/json
 
 - Listar todos os pedidos
 ```http request
-GET http://locahost:8080/api/pedido/{pedido}
+GET http://locahost:8080/api/pedido
 ```
 
 - Buscar um pedido
