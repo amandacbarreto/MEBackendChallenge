@@ -1,0 +1,17 @@
+[
+  {
+    "itens": [
+      {
+        "descricao": "Produto A",
+        "precoUnitario": 10.00,
+        "qtd": 1
+      },
+      {
+        "descricao": "Produto B",
+        "precoUnitario": 5.00,
+        "qtd": 2
+      }
+    ],
+    "pedido": "1"
+  }
+]

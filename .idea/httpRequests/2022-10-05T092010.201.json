@@ -1,0 +1,10 @@
+{
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ],
+  "pedido": "2"
+}

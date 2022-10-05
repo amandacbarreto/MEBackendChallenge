@@ -1,0 +1,581 @@
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 20,
+  "pedido":"123456-N"
+}
+
+<> 2022-10-05T092713.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"REPROVADO",
+  "itensAprovados": 0,
+  "valorAprovado": 0,
+  "pedido":"123456"
+}
+
+<> 2022-10-05T092645.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 2,
+  "valorAprovado": 20,
+  "pedido":"123456"
+}
+
+<> 2022-10-05T092632.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 4,
+  "valorAprovado": 21,
+  "pedido":"123456"
+}
+
+<> 2022-10-05T092607.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 10,
+  "pedido":"123456"
+}
+
+<> 2022-10-05T092216.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 20,
+  "pedido":"123456"
+}
+
+<> 2022-10-05T092152.201.json
+
+###
+
+DELETE http://localhost:8080/api/pedido/2
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/pedido/2
+Accept: application/json
+
+<> 2022-10-05T092109.200.json
+
+###
+
+GET http://localhost:8080/api/pedido/2
+Accept: application/json
+
+<> 2022-10-05T092058.200.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "itens": [
+    {
+      "pedido": "2",
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-05T092048.200.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "itens": [
+    {
+      "pedido": "2",
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-05T092022.200.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-05T092010.201.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-05T092001.201.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-05T091958.201.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"123456",
+  "itens": [
+    {
+      "descricao": "Item A",
+      "precoUnitario": 10,
+      "qtd": 1
+    },
+    {
+      "descricao": "Item B",
+      "precoUnitario": 5,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-05T091944.201.json
+
+###
+
+GET http://localhost:8080/api/pedido
+Accept: application/json
+
+<> 2022-10-05T091932.200.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 20,
+  "pedido":"123456-N"
+}
+
+<> 2022-10-04T225054.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"REPROVADO",
+  "itensAprovados": 0,
+  "valorAprovado": 0,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224957.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 2,
+  "valorAprovado": 20,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224917.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 4,
+  "valorAprovado": 21,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224844.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 4,
+  "valorAprovado": 21,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224749.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 10,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224649.201.json
+
+###
+
+POST http://localhost:8080/api/status
+Accept: application/json
+Content-Type: application/json
+
+{
+  "status":"APROVADO",
+  "itensAprovados": 3,
+  "valorAprovado": 20,
+  "pedido":"123456"
+}
+
+<> 2022-10-04T224558.201.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "itens": [
+    {
+      "pedido": "2",
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T224309.404.json
+
+###
+
+GET http://localhost:8080/api/pedido/2
+Accept: application/json
+
+<> 2022-10-04T224147.404.json
+
+###
+
+DELETE http://localhost:8080/api/pedido/2
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/pedido/2
+Accept: application/json
+
+<> 2022-10-04T224113.200.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "itens": [
+    {
+      "pedido": "2",
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T224053.400.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "itens": [
+    {
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T224030.400.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"3",
+  "itens": [
+    {
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T224005.400.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T223952.200.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-04T223937.201.json
+
+###
+
+PUT http://localhost:8080/api/pedido/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"3",
+  "itens": [
+    {
+      "descricao": "Produto D",
+      "precoUnitario": 20,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T223912.200.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-04T223856.400.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"2",
+  "itens": [
+    {
+      "descricao": "Produto C",
+      "precoUnitario": 10,
+      "qtd": 1
+    }
+  ]
+}
+
+<> 2022-10-04T223747.201.json
+
+###
+
+POST http://localhost:8080/api/pedido
+Accept: application/json
+Content-Type: application/json
+
+{
+  "pedido":"123456",
+  "itens": [
+    {
+      "descricao": "Item A",
+      "precoUnitario": 10,
+      "qtd": 1
+    },
+    {
+      "descricao": "Item B",
+      "precoUnitario": 5,
+      "qtd": 2
+    }
+  ]
+}
+
+<> 2022-10-04T223557.201.json
+
+###
+
+GET http://localhost:8080/api/pedido/1
+Accept: application/json
+
+<> 2022-10-04T223330.200.json
+
+###
+
+GET http://localhost:8080/api/pedido
+Accept: application/json
+
+<> 2022-10-04T223254.200.json
+
+###
+
+GET http://localhost:8080/api/pedido
+Accept: application/json
+
+<> 2022-10-04T223247.200.json
+
+###
+
+GET http://localhost:8080/api/pedido
+Accept: application/json
+
+<> 2022-10-04T223223.200.json
+
+###
+
