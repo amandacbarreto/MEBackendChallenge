@@ -2,6 +2,7 @@ package br.me.desafio.challengeme.entities;
 
 import br.me.desafio.challengeme.dto.StatusRespostaDTO;
 import br.me.desafio.challengeme.enums.StatusPedido;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,8 +22,10 @@ public class Status  implements Serializable {
     private Integer itensAprovados;
     private BigDecimal valorAprovado;
     private Pedido pedido;
-    private StatusPedido statusInformado;
-    private List<StatusPedido> status;
+    private StatusPedido statusPedido;
+
+    @JsonProperty("status")
+    private List<StatusPedido> statusList;
 
     public Status(Integer itensAprovados, BigDecimal valorAprovado, Pedido pedido) {
         this.itensAprovados = itensAprovados;
@@ -62,20 +65,20 @@ public class Status  implements Serializable {
         this.pedido = pedido;
     }
 
-    public StatusPedido getStatusInformado() {
-        return statusInformado;
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
     }
 
-    public void setStatusInformado(StatusPedido statusInformado) {
-        this.statusInformado = statusInformado;
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
     }
 
-    public List<StatusPedido> getStatus() {
-        return status;
+    public List<StatusPedido> getStatusList() {
+        return statusList;
     }
 
-    public void setStatus(List<StatusPedido> status) {
-        this.status = status;
+    public void setStatusList(List<StatusPedido> statusList) {
+        this.statusList = statusList;
     }
 
 
@@ -90,7 +93,7 @@ public class Status  implements Serializable {
         } else {
             list.add(StatusPedido.REPROVADO);
         }
-        this.setStatus(list);
+        this.setStatusList(list);
     }
     public Optional<StatusPedido> checkValor(){
         int priceComparison = pedido.precoTotal().compareTo(valorAprovado);
@@ -109,15 +112,15 @@ public class Status  implements Serializable {
     }
 
     public StatusRespostaDTO convertToDTO() {
-        return new StatusRespostaDTO(pedido.getId(), status);
+        return new StatusRespostaDTO(pedido.getId(), statusList);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Status statusInformado = (Status) o;
-        return Objects.equals(id, statusInformado.id);
+        Status status = (Status) o;
+        return Objects.equals(id, status.id);
     }
 
     @Override
