@@ -2,7 +2,6 @@ package br.me.desafio.challengeme.resources.exceptions;
 
 import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
