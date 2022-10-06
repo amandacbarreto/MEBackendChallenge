@@ -6,7 +6,7 @@
 
  ## Primeios passos
 
-1. Se necessário, instale [Maven](http://maven.apache.org/install.html))
+1. Se necessário, instale [Maven](http://maven.apache.org/install.html)
 
 2. Faça o `clone` do projeto com o seguinte comando: 
 
@@ -53,7 +53,7 @@ content-type: application/json
 
 - Listar todos os pedidos
 ```http request
-GET http://locahost:8080/api/pedido/{pedido}
+GET http://locahost:8080/api/pedido
 ```
 
 - Buscar um pedido
@@ -118,7 +118,8 @@ http://localhost:8080/h2-console
 ```
 
 Utilize os seguintes dados:
-User Name:  **sa** 
-Não possui senha.
+
+- User Name:  **sa** 
+- Não possui senha.
 
 
