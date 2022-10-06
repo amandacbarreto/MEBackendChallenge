@@ -1,20 +1,16 @@
 package br.me.desafio.challengeme.services;
 
-import br.me.desafio.challengeme.DTO.ItemDTO;
-import br.me.desafio.challengeme.DTO.PedidoDTO;
+import br.me.desafio.challengeme.dto.ItemDTO;
+import br.me.desafio.challengeme.dto.PedidoDTO;
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.repositories.PedidoRepository;
-import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 import java.util.*;
 
 @Service

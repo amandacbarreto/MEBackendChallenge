@@ -1,8 +1,7 @@
 package br.me.desafio.challengeme.services;
 
-import br.me.desafio.challengeme.DTO.ItemDTO;
+import br.me.desafio.challengeme.dto.ItemDTO;
 import br.me.desafio.challengeme.entities.Item;
-import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.repositories.ItemRepository;
 import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;

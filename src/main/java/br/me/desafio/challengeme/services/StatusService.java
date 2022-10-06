@@ -1,6 +1,6 @@
 package br.me.desafio.challengeme.services;
 
-import br.me.desafio.challengeme.DTO.*;
+import br.me.desafio.challengeme.dto.*;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.entities.Status;
 import br.me.desafio.challengeme.enums.StatusPedido;

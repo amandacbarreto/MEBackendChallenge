@@ -1,4 +1,4 @@
-package br.me.desafio.challengeme.DTO;
+package br.me.desafio.challengeme.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

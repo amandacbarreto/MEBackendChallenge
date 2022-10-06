@@ -1,6 +1,6 @@
 package br.me.desafio.challengeme.resources;
 
-import br.me.desafio.challengeme.DTO.PedidoDTO;
+import br.me.desafio.challengeme.dto.PedidoDTO;
 import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;

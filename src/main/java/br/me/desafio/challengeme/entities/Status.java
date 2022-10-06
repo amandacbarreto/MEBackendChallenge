@@ -1,6 +1,6 @@
 package br.me.desafio.challengeme.entities;
 
-import br.me.desafio.challengeme.DTO.StatusRespostaDTO;
+import br.me.desafio.challengeme.dto.StatusRespostaDTO;
 import br.me.desafio.challengeme.enums.StatusPedido;
 
 import javax.persistence.*;

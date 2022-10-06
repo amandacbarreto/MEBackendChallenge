@@ -1,9 +1,8 @@
 package br.me.desafio.challengeme.resources;
 
 
-import br.me.desafio.challengeme.DTO.StatusDTO;
-import br.me.desafio.challengeme.DTO.StatusRespostaDTO;
-import br.me.desafio.challengeme.entities.Status;
+import br.me.desafio.challengeme.dto.StatusDTO;
+import br.me.desafio.challengeme.dto.StatusRespostaDTO;
 import br.me.desafio.challengeme.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
