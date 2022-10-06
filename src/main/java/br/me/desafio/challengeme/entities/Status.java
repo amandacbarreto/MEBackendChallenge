@@ -82,9 +82,11 @@ public class Status  implements Serializable {
     public void checkStatus(StatusPedido statusPedido){
         List<StatusPedido> list = new ArrayList<>();
         if (statusPedido.equals(StatusPedido.APROVADO)){
-            if (this.checkValor().isPresent()) list.add(this.checkValor().get());
-            if (this.checkItens().isPresent()) list.add(this.checkItens().get());
-            if (list.isEmpty()) list.add(StatusPedido.APROVADO);
+            this.checkValor().ifPresent(list::add);
+            this.checkItens().ifPresent(list::add);
+            if (list.isEmpty()) {
+                list.add(StatusPedido.APROVADO);
+            }
         } else {
             list.add(StatusPedido.REPROVADO);
         }

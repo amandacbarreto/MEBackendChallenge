@@ -28,10 +28,10 @@ public class PedidoService {
     }
 
     public Pedido findById(String id){
-        try{
-            Optional<Pedido> obj = repository.findById(id);
+        Optional<Pedido> obj = repository.findById(id);
+        if (obj.isPresent()) {
             return obj.get();
-        } catch (NoSuchElementException e){
+        } else {
             throw new ResourceNotFoundException(id);
         }
     }
