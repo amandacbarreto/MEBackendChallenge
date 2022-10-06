@@ -1,6 +1,8 @@
 package br.me.desafio.challengeme.services;
 
+import br.me.desafio.challengeme.DTO.ItemDTO;
 import br.me.desafio.challengeme.entities.Item;
+import br.me.desafio.challengeme.entities.Pedido;
 import br.me.desafio.challengeme.repositories.ItemRepository;
 import br.me.desafio.challengeme.services.exceptions.DatabaseException;
 import br.me.desafio.challengeme.services.exceptions.ResourceNotFoundException;
@@ -28,8 +30,9 @@ public class ItemService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Item insert (Item obj) {
-        return repository.save(obj);
+    public Item insert (ItemDTO obj) {
+        Item item = new Item(null, obj.getDescricao(), obj.getPrecoUnitario(), obj.getQtd(), null);
+        return repository.save(item);
     }
 
     public void delete (Long id) {
@@ -42,19 +45,20 @@ public class ItemService {
         }
     }
 
-    public Item update (Long id, Item obj){
+    public Item update (Long id, ItemDTO obj){
         try{
-            Item entity = repository.getReferenceById(id);
-            updateData(entity, obj);
-            return repository.save(entity);
+            Item item = repository.getReferenceById(id);
+            updateData(item, obj);
+            return repository.save(item);
         } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException(id);
         }
     }
 
-    private void updateData(Item entity, Item obj) {
-        entity.setDescricao(obj.getDescricao());
-        entity.setPrecoUnitario(obj.getPrecoUnitario());
+    private void updateData(Item item, ItemDTO obj) {
+        item.setQuantidade(obj.getQtd());
+        item.setDescricao(obj.getDescricao());
+        item.setPrecoUnitario(obj.getPrecoUnitario());
     }
 
 }

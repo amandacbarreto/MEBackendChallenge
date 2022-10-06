@@ -1,5 +1,6 @@
 package br.me.desafio.challengeme.resources;
 
+import br.me.desafio.challengeme.DTO.ItemDTO;
 import br.me.desafio.challengeme.entities.Item;
 import br.me.desafio.challengeme.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class ItemResource {
     }
 
     @PostMapping
-    public ResponseEntity<Item> insert(@Valid @RequestBody Item obj){
-        obj = service.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+    public ResponseEntity<Item> insert(@Valid @RequestBody ItemDTO obj){
+        Item item = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(item.getId()).toUri();
+        return ResponseEntity.created(uri).body(item);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -44,8 +45,8 @@ public class ItemResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Item> update(@Valid @PathVariable Long id, @RequestBody Item obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<Item> update(@Valid @PathVariable Long id, @RequestBody ItemDTO obj) {
+        Item item = service.update(id, obj);
+        return ResponseEntity.ok().body(item);
     }
 }
